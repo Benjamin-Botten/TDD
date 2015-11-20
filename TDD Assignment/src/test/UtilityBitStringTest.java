@@ -27,4 +27,16 @@ public class UtilityBitStringTest {
 	public void BitString_StringContaining2_ShouldThrowIllegalArgumentException() {
 		BitString bs = new BitString("010101010201010101010");
 	}
+	
+	@Test
+	public void parseInt_BitStringContaining1010_ShouldReturn10() {
+		BitString bs = new BitString("1010");
+		assertThat(bs.parseInt(), is(equalTo(10)));
+	}
+	
+	@Test
+	public void parseString_IntContaining10_BitStringContaining1010() {
+		int i = 10;
+		assertThat(BitString.parseString(i), is(equalTo("1010")));
+	}
 }
