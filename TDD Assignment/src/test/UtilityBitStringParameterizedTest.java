@@ -13,26 +13,20 @@ import static org.hamcrest.CoreMatchers.*;
 
 import øving.Utility.BitString;
 
-@RunWith (Parameterized.class)
+@RunWith(Parameterized.class)
 public class UtilityBitStringParameterizedTest {
 
     private Integer input;
     private String expected;
-    
+
     public UtilityBitStringParameterizedTest(Integer input, String expected) {
         this.input = input;
         this.expected = expected;
     }
-    
+
     @Parameterized.Parameters
     public static Collection bitStrings() {
-        return Arrays.asList(new Object[][] {
-                {10, "1010"},
-                {2, "10"},
-                {5, "101"},
-                {16, "10000"},
-                {17, "10001"}
-        });
+        return Arrays.asList(new Object[][] { { 10, "1010" }, { 2, "10" }, { 5, "101" }, { 16, "10000" }, { 17, "10001" } });
     }
 
     @Test
