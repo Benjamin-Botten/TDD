@@ -24,8 +24,7 @@ public class UtilityBitStringTest {
 	}
 	
 	@Test	(expected = IllegalArgumentException.class)
-	public void BitString_FaultyCharString_ShouldThrowIllegalArgumentException() {
+	public void BitString_StringContaining2_ShouldThrowIllegalArgumentException() {
 		BitString bs = new BitString("010101010201010101010");
 	}
-
 }
