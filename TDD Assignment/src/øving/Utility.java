@@ -37,13 +37,13 @@ public class Utility {
 
         public int parseInt() {
             int result = 0;
-            int index = 0;
+            int indexExponent = 0;
             int length = bitString.length() - 1;
             for (int i = length; i >= 0; --i) {
-                if (bitString.charAt(i) == ONE_CHAR) { //If the char at position i in the bitstring is '1', add the value of the current binary position in decimal
-                    result += Math.pow(2, index++);    //and increment the left to right index.
+                if (bitString.charAt(i) == ONE_CHAR) {          //If the char at position i in the bitstring is '1', add the value of the current binary position in decimal
+                    result += Math.pow(2, indexExponent++);     //and increment the exponent index.
                 } else {
-                    index++;
+                    indexExponent++;
                 }
             }
             return result;
