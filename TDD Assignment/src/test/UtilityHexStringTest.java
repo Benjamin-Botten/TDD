@@ -5,9 +5,11 @@ import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.Test;
 
+import øving.Utility.HexString;
+
 public class UtilityHexStringTest {
 
-    @Test
+    @Test (expected = IllegalArgumentException.class)
     public void HexString_OverflowString_ShouldThrowIllegalArgumentException() {
         new HexString("FFFFFFFFFFFFF");
     }

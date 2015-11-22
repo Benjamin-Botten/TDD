@@ -75,5 +75,9 @@ public class Utility {
     
     public static class HexString {
         
+        private String hexString;
+        public HexString(String str) {
+            this.hexString = str;
+        }
     }
 }
