@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import øving.Utility.BitOperator;
 import øving.Utility.BitString;
-import static øving.Utility.*;
 
 public class BitOperatorTest {
 
