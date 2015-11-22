@@ -15,6 +15,7 @@ public class Utility {
         public static final char ZERO_CHAR = '0';
         public static final char ONE_CHAR = '1';
         public static final String EMPTY_BITSTRING = "0";
+        public static final String REGEX_PATTERN_BINARY = "[01]+";
         
         public BitString() {
             bitString = EMPTY_BITSTRING;
@@ -27,7 +28,7 @@ public class Utility {
                 this.bitString = bitString;
             if (this.bitString.length() > MAX_LEN)
                 throw new IllegalArgumentException("Number of characters in BitString exceeds MAX_LEN!");
-            if (!this.bitString.matches("[01]+"))
+            if (!this.bitString.matches(REGEX_PATTERN_BINARY))
                 throw new IllegalArgumentException("String is not binary!");
         }
 
@@ -79,6 +80,7 @@ public class Utility {
         
         public static final int MAX_LEN = 6;
         public static final String EMPTY_HEXSTRING = "0";
+        public static final String REGEX_PATTERN_HEXADECIMAL = "[0-9a-fA-F]+";
         
         public HexString() {
             hexString = EMPTY_HEXSTRING;
@@ -88,7 +90,7 @@ public class Utility {
             this.hexString = hexString;
             if(this.hexString.isEmpty()) this.hexString = EMPTY_HEXSTRING;
             if(this.hexString.length() > MAX_LEN) throw new IllegalArgumentException("Number of characters in hexstring exceeds MAX_LEN!");
-            if(!this.hexString.matches("[0-9a-fA-F]+")) throw new IllegalArgumentException("Hexstring contains non-hexadecimals!");
+            if(!this.hexString.matches(REGEX_PATTERN_HEXADECIMAL)) throw new IllegalArgumentException("Hexstring contains non-hexadecimals!");
         }
         
         public boolean equals(Object obj) {
