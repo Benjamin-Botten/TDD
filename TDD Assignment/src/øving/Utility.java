@@ -38,13 +38,18 @@ public class Utility {
 
         public int parseInt() {
             int result = 0;
-            int indexExponent = 0;
+            int indexOfExponent = 0;
             int length = bitString.length() - 1;
+            return getBitStringValue(result, length, indexOfExponent);
+        }
+        
+        //Since this method only needs to be called once for any unique bitstring, we can optimize this further.
+        private int getBitStringValue(int result, int length, int indexOfExponent) {
             for (int i = length; i >= 0; --i) {
                 if (bitString.charAt(i) == ONE_CHAR) {          //If the char at position i in the bitstring is '1', add the value of the current binary position in decimal
-                    result += Math.pow(2, indexExponent++);     //and increment the exponent index.
+                    result += Math.pow(2, indexOfExponent++);     //and increment the exponent index.
                 } else {
-                    indexExponent++;
+                    indexOfExponent++;
                 }
             }
             return result;
@@ -53,6 +58,26 @@ public class Utility {
         public static BitString parseString(int n) {
             String result = new String();
             ArrayDeque<Character> stack = new ArrayDeque<>();
+            int remainder;
+            getBitsFromInteger(n, stack);
+            while (!stack.isEmpty())
+                result += stack.pop();
+            
+            int nZerosToPrepend = MAX_LEN - result.length();
+            result = prependZero(nZerosToPrepend, result);
+            
+            return new BitString(result);
+        }
+        
+        public static String prependZero(int n, String string) {
+            String tmp = "";
+            for(int i = 0; i < n; ++i) {
+                tmp += "0";
+            }
+            return tmp + string;
+        }
+
+        private static void getBitsFromInteger(int n, ArrayDeque<Character> stack) {
             int remainder;
             int curVal = n;
             while (curVal != 0) {
@@ -63,10 +88,6 @@ public class Utility {
                     stack.push(ONE_CHAR);
                 curVal /= 2;
             }
-            while (!stack.isEmpty())
-                result += stack.pop();
-
-            return new BitString(result);
         }
 
         public String toString() {
@@ -96,5 +117,10 @@ public class Utility {
         public boolean equals(Object obj) {
             return obj.equals(hexString);
         }
+        
+    }
+    
+    public static class BitOperation {
+        
     }
 }

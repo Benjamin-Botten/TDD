@@ -26,7 +26,8 @@ public class UtilityBitStringParameterizedTest {
 
     @Parameterized.Parameters
     public static Collection bitStrings() {
-        return Arrays.asList(new Object[][] { { 10, "1010" }, { 2, "10" }, { 5, "101" }, { 16, "10000" }, { 17, "10001" } });
+        return Arrays.asList(new Object[][] { { 10, "000000000000000000001010" }, { 2, "000000000000000000000010" }, { 5, "000000000000000000000101" }, 
+                { 16, "000000000000000000010000" }, { 17, "000000000000000000010001" } });
     }
 
     @Test
