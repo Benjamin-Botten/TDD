@@ -30,7 +30,7 @@ public class UtilityBitStringParameterizedTest {
     }
 
     @Test
-    public void parseString_Input_Expected() {
+    public void parseString_IntegerInput_StringExpected() {
         assertThat(BitString.parseString(input), is(equalTo(expected)));
     }
 }

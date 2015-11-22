@@ -72,4 +72,8 @@ public class Utility {
             return bitString;
         }
     }
+    
+    public static class HexString {
+        
+    }
 }
