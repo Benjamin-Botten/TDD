@@ -76,8 +76,20 @@ public class Utility {
     public static class HexString {
         
         private String hexString;
-        public HexString(String str) {
-            this.hexString = str;
+        
+        public static final int MAX_LEN = 6;
+        
+        public HexString() {
+            hexString = "0";
+        }
+
+        public HexString(String hexString) {
+            this.hexString = hexString;
+            if(this.hexString.length() > MAX_LEN) throw new IllegalArgumentException("Number of characters in hexstring exceeds MAX_LEN!");
+        }
+        
+        public boolean equals(Object obj) {
+            return obj.equals(hexString);
         }
     }
 }
