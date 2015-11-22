@@ -8,10 +8,7 @@ public class Utility {
 
         private String bitString;
 
-        public static final int MAX_LEN = 24; // Vi rensker code smell 'magiske
-                                              // tall' med å skape en konstant
-                                              // for max lengde på bitstrenger
-
+        public static final int MAX_LEN = 24;
         public static final char ZERO_CHAR = '0';
         public static final char ONE_CHAR = '1';
         public static final String EMPTY_BITSTRING = "0";
