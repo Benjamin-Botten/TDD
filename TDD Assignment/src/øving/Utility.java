@@ -141,9 +141,7 @@ public class Utility {
         
         private static final Operation BITSTRING_OR = new Operation() {
             public BitString applyTo(BitString str0, BitString str1) {
-                int val0 = str0.parseInt();
-                int val1 = str1.parseInt();
-                return BitString.parseString(val0 | val1);
+                return BitString.parseString(str0.parseInt() | str1.parseInt());
             }
         };
         
