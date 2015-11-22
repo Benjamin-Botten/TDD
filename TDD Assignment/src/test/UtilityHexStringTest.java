@@ -17,10 +17,11 @@ public class UtilityHexStringTest {
     @Test
     public void HexString_EmptyString_ShouldReturnStringContainingZero() {
         assertThat(new HexString(), is(equalTo("0")));
+        assertThat(new HexString(""), is(equalTo("0")));
     }
     
     @Test   (expected = IllegalArgumentException.class)
     public void HexString_StringContainingNonHexadecimal_ShouldThrowIllegalArgumentException() {
-        new HexString("G");
+        new HexString("012G45");
     }
 }

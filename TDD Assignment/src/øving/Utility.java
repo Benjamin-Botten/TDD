@@ -21,7 +21,7 @@ public class Utility {
         }
 
         public BitString(String bitString) {
-            if (bitString.equals(""))
+            if (bitString.isEmpty())
                 this.bitString = EMPTY_BITSTRING;
             else
                 this.bitString = bitString;
@@ -78,14 +78,17 @@ public class Utility {
         private String hexString;
         
         public static final int MAX_LEN = 6;
+        public static final String EMPTY_HEXSTRING = "0";
         
         public HexString() {
-            hexString = "0";
+            hexString = EMPTY_HEXSTRING;
         }
 
         public HexString(String hexString) {
             this.hexString = hexString;
+            if(this.hexString.isEmpty()) this.hexString = EMPTY_HEXSTRING;
             if(this.hexString.length() > MAX_LEN) throw new IllegalArgumentException("Number of characters in hexstring exceeds MAX_LEN!");
+            if(!this.hexString.matches("[0-9a-fA-F]+")) throw new IllegalArgumentException("Hexstring contains non-hexadecimals!");
         }
         
         public boolean equals(Object obj) {
