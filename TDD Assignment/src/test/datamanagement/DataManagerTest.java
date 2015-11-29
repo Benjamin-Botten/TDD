@@ -66,13 +66,13 @@ public class DataManagerTest {
     }
     
     @Test (expected = IllegalArgumentException.class)
-    public void verifySampleLine_03ac0f_1_110101000000110111001101_001000011110011101001111_NOERROR_ShouldReturnFalse() {
+    public void verifySampleLine_03ac0f_1_110101000000110111001101_001000011110011101001111_NOERROR_ShouldThrowIllegalArgumentException() {
         DataManager dm = new DataManager();
         dm.verifySampleLine("03ac0f 1 110101000000110111001101 001000011110011101001111 NOERROR");
     }
     
     @Test (expected = NoSuchElementException.class)
-    public void verifySampleLine_03ac0f_1_110101000000110111001101_ShouldThrowIllegalArgumentException() {
+    public void verifySampleLine_03ac0f_1_110101000000110111001101_ShouldThrowNoSuchElementException() {
         DataManager dm = new DataManager();
         dm.verifySampleLine("03ac0f 1 110101000000110111001101");
     }
