@@ -5,34 +5,62 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+import øving.utility.Utility.BitOperator;
+import øving.utility.Utility.BitString;
+import øving.utility.Utility.HexString;
 
 public class DataManager {
-    
+
     public static final String SAMPLEFILE_1 = "sampledata_1.sd";
     private SampleFileReader sfReader;
+
+    public DataManager() {
+    }
     
     public DataManager(SampleFileReader sfReader) {
         this.sfReader = sfReader;
     }
-    
+
     public boolean openSampleFile(String path) {
         return sfReader.openSampleFile(path);
     }
-    
+
     public String readLine() {
         return sfReader.readLine();
     }
-    
+
     public boolean hasNextLine() {
         return sfReader.hasNextLine();
     }
-    
-    public class SampleFileReader {
+
+    public boolean verifySampleLine(String string) {
         
+        StringTokenizer tokenizer = new StringTokenizer(string);
+        
+        HexString idData = new HexString(tokenizer.nextToken());
+        
+        int idOperator = Integer.parseInt(tokenizer.nextToken());
+        
+        if(idOperator <= 0 || idOperator > BitOperator.NUM_OPERATORS) return false;
+        
+        BitString[] bitStringCouple = new BitString[] {
+                new BitString(tokenizer.nextToken()), 
+                new BitString(tokenizer.nextToken()) 
+        };
+        
+        if(tokenizer.hasMoreTokens()) throw new IllegalArgumentException("Too many arguments on sample data line, invalid data!");  
+        
+        return true;
+    }
+
+    public class SampleFileReader {
+
         private File sampleFile;
         private BufferedReader reader;
         private String path;
-        
+
         public boolean openSampleFile(String path) {
             this.path = path;
             sampleFile = new File(path);
@@ -44,11 +72,11 @@ public class DataManager {
             }
             return fileExists();
         }
-        
+
         public boolean fileExists() {
             return sampleFile.exists();
         }
-        
+
         public String readLine() {
             try {
                 return reader.readLine();
@@ -57,11 +85,11 @@ public class DataManager {
             }
             return null;
         }
-        
+
         public boolean hasNextLine() {
             try {
                 reader.mark(0);
-                if(reader.readLine() != null) {
+                if (reader.readLine() != null) {
                     reader.reset();
                     return true;
                 }
@@ -70,10 +98,6 @@ public class DataManager {
             }
             return false;
         }
-        
-    }
 
-    public boolean verifySampleLine(String string) {
-        return false;
     }
 }

@@ -5,6 +5,8 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
+import java.util.NoSuchElementException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -42,7 +44,7 @@ public class DataManagerTest {
         assertThat(dm.readLine(), is(equalTo("03ac0f 1 110101000000110111001101 001000011110011101001111")));
         assertThat(dm.readLine(), is(equalTo("ac0e1e 2 001000011110011101001111 000101010101010101111001")));
     }
-
+    
     @Test
     public void hasNextLine_MockedSampleFileContents_ShouldReturnTrueTrueAndFalse() {
         DataManager dm = new DataManager(sfr);
@@ -53,7 +55,25 @@ public class DataManagerTest {
     
     @Test
     public void verifySampleLine_03ac0f_1_110101000000110111001101_001000011110011101001111_ShouldReturnTrue() {
-        DataManager dm = new DataManager(sfr);
+        DataManager dm = new DataManager();
         assertThat(dm.verifySampleLine("03ac0f 1 110101000000110111001101 001000011110011101001111"), is(equalTo(true)));
+    }
+    
+    @Test
+    public void verifySampleLine_03ac0f_3_110101000000110111001101_001000011110011101001111_ShouldReturnFalse() {
+        DataManager dm = new DataManager();
+        assertThat(dm.verifySampleLine("03ac0f 3 110101000000110111001101 001000011110011101001111"), is(equalTo(false)));
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void verifySampleLine_03ac0f_1_110101000000110111001101_001000011110011101001111_NOERROR_ShouldReturnFalse() {
+        DataManager dm = new DataManager();
+        dm.verifySampleLine("03ac0f 1 110101000000110111001101 001000011110011101001111 NOERROR");
+    }
+    
+    @Test (expected = NoSuchElementException.class)
+    public void verifySampleLine_03ac0f_1_110101000000110111001101_ShouldThrowIllegalArgumentException() {
+        DataManager dm = new DataManager();
+        dm.verifySampleLine("03ac0f 1 110101000000110111001101");
     }
 }

@@ -145,10 +145,11 @@ public class Utility {
             }
         };
         
+        public static final int NUM_OPERATORS = 2;
         
         public static final BitOperator AND = new BitOperator(BITSTRING_AND);
         public static final BitOperator OR = new BitOperator(BITSTRING_OR);
-
+        
         private Operation op;
 
         public BitOperator(Operation op) {
