@@ -35,9 +35,9 @@ public class DataManager {
         return sfReader.hasNextLine();
     }
 
-    public boolean verifySampleLine(String string) {
+    public boolean verifySampleLine(String sampleLine) {
         
-        StringTokenizer tokenizer = new StringTokenizer(string);
+        StringTokenizer tokenizer = new StringTokenizer(sampleLine);
         
         HexString idData = new HexString(tokenizer.nextToken());
         
@@ -53,6 +53,10 @@ public class DataManager {
         if(tokenizer.hasMoreTokens()) throw new IllegalArgumentException("Too many arguments on sample data line, invalid data!");  
         
         return true;
+    }
+    
+    public boolean saveSample(String sampleLine) {
+        return false;
     }
 
     public class SampleFileReader {

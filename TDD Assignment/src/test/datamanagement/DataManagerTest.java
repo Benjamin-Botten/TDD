@@ -76,4 +76,10 @@ public class DataManagerTest {
         DataManager dm = new DataManager();
         dm.verifySampleLine("03ac0f 1 110101000000110111001101");
     }
+    
+    @Test
+    public void saveSample_03ac0f_1_110101000000110111001101_001000011110011101001111_ShouldReturnTrue() {
+        DataManager dm = new DataManager();
+        assertThat(dm.saveSample("03ac0f_1_110101000000110111001101_001000011110011101001111"), is(equalTo(true)));
+    }
 }
