@@ -1,12 +1,12 @@
-package test;
+package test.utility;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.Test;
 
-import øving.Utility.BitOperator;
-import øving.Utility.BitString;
+import øving.utility.Utility.BitOperator;
+import øving.utility.Utility.BitString;
 
 public class BitOperatorTest {
 

@@ -1,4 +1,4 @@
-package øving;
+package øving.utility;
 
 import java.util.ArrayDeque;
 

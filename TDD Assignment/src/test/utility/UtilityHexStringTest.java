@@ -1,11 +1,11 @@
-package test;
+package test.utility;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.Test;
 
-import øving.Utility.HexString;
+import øving.utility.Utility.HexString;
 
 public class UtilityHexStringTest {
 

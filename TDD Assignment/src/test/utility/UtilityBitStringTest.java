@@ -1,12 +1,12 @@
-package test;
+package test.utility;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.Test;
 
-import øving.Utility;
-import øving.Utility.BitString;
+import øving.utility.Utility;
+import øving.utility.Utility.BitString;
 
 //Konvensjon: navnPåMetodeSomTestes_InputParametre_ForventetResultat()
 

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_20"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/Benjamin/Desktop/Mockito/mockito-all-1.9.5.jar">
+	<classpathentry kind="lib" path="C:/Users/robot/Documents/Java Programming, JARs, etc/mockito-all-1.9.5.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Users/Benjamin/Desktop/Mockito/javadoc/"/>
+			<attribute name="javadoc_location" value="file:/C:/Users/robot/Documents/Java%20Programming,%20JARs,%20etc/javadoc/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

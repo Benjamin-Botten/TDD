@@ -1,4 +1,4 @@
-package test;
+package test.utility;
 
 import static org.junit.Assert.*;
 
@@ -9,9 +9,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import static org.hamcrest.CoreMatchers.*;
 
-import øving.Utility.BitString;
+import øving.utility.Utility.BitString;
+
+import static org.hamcrest.CoreMatchers.*;
 
 @RunWith(Parameterized.class)
 public class UtilityBitStringParameterizedTest {
