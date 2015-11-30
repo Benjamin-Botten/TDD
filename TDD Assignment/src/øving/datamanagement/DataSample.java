@@ -4,44 +4,37 @@ import øving.utility.Utility.BitString;
 import øving.utility.Utility.HexString;
 
 public class DataSample {
-    
-    private HexString id;
-    private BitString data;
-    private String sampleLine;
-    private int idata;
 
-    
-    public DataSample(HexString id, String sampleLine) {
-        this.id = id;
+    private BitString processed;
+    private String sampleLine;
+    private int dataVal;
+    private int bitsValue0, bitsValue1;
+
+    public DataSample(BitString processed, int dataVal, String sampleLine, int bitsValue0, int bitsValue1) {
+        this.processed = processed;
+        this.dataVal = dataVal;
         this.sampleLine = sampleLine;
+        this.bitsValue0 = bitsValue0;
+        this.bitsValue1 = bitsValue1;
     }
-    
-    public DataSample(HexString id, BitString data, int idata) {
-        this.id = id;
-        this.data = data;
-        this.idata = idata;
+
+    public BitString getProcessed() {
+        return processed;
     }
-    
-    public DataSample(HexString id, BitString data, int idata, String sampleLine) {
-        this.id = id;
-        this.data = data;
-        this.idata = idata;
-        this.sampleLine = sampleLine;
-    }
-    
-    public HexString getID() {
-        return id;
-    }
-    
-    public BitString getData() {
-        return data;
-    }
-    
+
     public String getSampleLine() {
         return sampleLine;
     }
-    
-    public int getIntegerData() {
-        return idata;
+
+    public int getDataVal() {
+        return dataVal;
+    }
+
+    public int getBitsValue0() {
+        return bitsValue0;
+    }
+
+    public int getBitsValue1() {
+        return bitsValue1;
     }
 }

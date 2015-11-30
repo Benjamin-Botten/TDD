@@ -57,11 +57,33 @@ public class DataManagerTest {
     }
     
     @Test
-    public void processLine_StringContaining03ac0f_1_110101000000110111001101_001000011110011101001111_ShouldReturnDataSampleContaining_03ac0f_000000000000010101001101() {
+    public void processLine_StringContaining03ac0f_1_110101000000110111001101_001000011110011101001111_ShouldReturnTrue() {
         dm = new DataManager();
-        HexString id = new HexString("03ac0f");
-        BitString data = new BitString("000000000000010101001101");
-        DataSample ds = new DataSample(id, data, data.parseInt());
-        assertThat(dm.processLine("03ac0f 1 110101000000110111001101 001000011110011101001111"), is(equalTo(ds)));
+        assertThat(dm.processLine("03ac0f 1 110101000000110111001101 001000011110011101001111"), is(equalTo(true)));
+    }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void processLine_InvalidSampleLine_ShouldThrowIllegalArgumentException() {
+        dm = new DataManager();
+        dm.processLine("03ac0f 1 110101000000110111001101 001000011110011101001111 NOERRORHERE");
+    }
+    
+    @Test
+    public void getSampleData_HexStringContainingID03ac0f_ShouldReturnCorrectDataSample() {
+        dm = new DataManager();
+        String expectedSampleLine = "03ac0f 1 110101000000110111001101 001000011110011101001111";
+        BitString expectedProcessed = new BitString("000000000000010101001101");
+        BitString bitString0 = new BitString("110101000000110111001101");
+        BitString bitString1 = new BitString("001000011110011101001111");
+        int expectedDataVal = expectedProcessed.parseInt();
+        int expectedBitsVal0 = bitString0.parseInt();
+        int expectedBitsVal1 = bitString1.parseInt();
+        
+        DataSample actual = dm.getDataSample(new HexString("03ac0f"));
+        assertThat(actual.getSampleLine(), is(equalTo(expectedSampleLine)));
+        assertThat(actual.getProcessed(), is(equalTo(expectedProcessed)));
+        assertThat(actual.getDataVal(), is(equalTo(expectedDataVal)));
+        assertThat(actual.getBitsValue0(), is(equalTo(expectedBitsVal0)));
+        assertThat(actual.getBitsValue1(), is(equalTo(expectedBitsVal1)));
     }
 }

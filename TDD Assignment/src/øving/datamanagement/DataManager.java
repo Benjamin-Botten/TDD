@@ -21,7 +21,7 @@ public class DataManager {
 
     public DataManager() {
     }
-    
+
     public DataManager(SampleFileReader sfReader) {
         this.sfReader = sfReader;
     }
@@ -37,8 +37,40 @@ public class DataManager {
     public boolean hasNextLine() {
         return sfReader.hasNextLine();
     }
+
+    public boolean processLine(String sampleLine) {
+        StringTokenizer tokenizer = new StringTokenizer(sampleLine);
+        HexString id = new HexString(tokenizer.nextToken());
+        int operator = Integer.parseInt(tokenizer.nextToken());
+        BitString bstr0 = new BitString(tokenizer.nextToken());
+        BitString bstr1 = new BitString(tokenizer.nextToken());
+        if (tokenizer.hasMoreTokens())
+            throw new IllegalArgumentException("Invalid sample line, too many tokens!");
+
+        int valBits0 = bstr0.parseInt();
+        int valBits1 = bstr1.parseInt();
+        
+        BitString processed = null;
+        int dataVal;
+        
+        
+        if (operator == 1) {
+            processed = BitOperator.AND.applyTo(bstr0, bstr1);
+        } 
+        else if (operator == 2) {
+            processed = BitOperator.OR.applyTo(bstr0, bstr1);
+        }
+
+        dataVal = processed.parseInt();
+        
+        DataSample result = new DataSample(processed, dataVal, sampleLine, valBits0, valBits1);
+        
+        sampleMap.put(id, result);
+        
+        return true;
+    }
     
-    public DataSample processLine(String sampleLine) {
+    public DataSample getDataSample(HexString id) {
         return null;
     }
 
