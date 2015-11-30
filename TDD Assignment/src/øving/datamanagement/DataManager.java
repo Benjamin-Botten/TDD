@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -17,7 +19,7 @@ public class DataManager {
 
     public static final String SAMPLEFILE_1 = "sampledata_1.sd";
     private SampleFileReader sfReader;
-    private Map<HexString, DataSample> sampleMap = new HashMap<HexString, DataSample>();
+    private Map<HexString, List<DataSample>> sampleMap = new HashMap<HexString, List<DataSample>>();
 
     public DataManager() {
     }
@@ -44,34 +46,43 @@ public class DataManager {
         int operator = Integer.parseInt(tokenizer.nextToken());
         BitString bstr0 = new BitString(tokenizer.nextToken());
         BitString bstr1 = new BitString(tokenizer.nextToken());
+        
         if (tokenizer.hasMoreTokens())
             throw new IllegalArgumentException("Invalid sample line, too many tokens!");
 
-        int valBits0 = bstr0.parseInt();
-        int valBits1 = bstr1.parseInt();
         
-        BitString processed = null;
-        int dataVal;
+        BitString processed;
+        int dataVal, valBits0, valBits1;
         
-        
-        if (operator == 1) {
-            processed = BitOperator.AND.applyTo(bstr0, bstr1);
-        } 
-        else if (operator == 2) {
-            processed = BitOperator.OR.applyTo(bstr0, bstr1);
-        }
-
+        processed = processBitStrings(operator, bstr0, bstr1);
         dataVal = processed.parseInt();
+        valBits0 = bstr0.parseInt();
+        valBits1 = bstr1.parseInt();
         
         DataSample result = new DataSample(processed, dataVal, sampleLine, valBits0, valBits1);
-        
-        sampleMap.put(id, result);
+        if(sampleMap.get(id) != null) {
+            sampleMap.get(id).add(result);
+        } else {
+            List<DataSample> list = new ArrayList<>();
+            list.add(result);
+            sampleMap.put(id, list);   
+        }
         
         return true;
     }
     
-    public DataSample getDataSample(HexString id) {
-        return null;
+    private BitString processBitStrings(int operator, BitString bstr0, BitString bstr1) {
+        if (operator == 1) {
+            return BitOperator.AND.applyTo(bstr0, bstr1);
+        } 
+        else if (operator == 2) {
+            return BitOperator.OR.applyTo(bstr0, bstr1);
+        }
+        return new BitString();
+    }
+    
+    public List<DataSample> getDataSamples(HexString id) {
+        return sampleMap.get(id);
     }
 
     public class SampleFileReader {

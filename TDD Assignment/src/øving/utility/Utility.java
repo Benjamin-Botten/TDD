@@ -30,7 +30,12 @@ public class Utility {
         }
 
         public boolean equals(Object obj) {
-            return bitString.equals(obj);
+            if(obj instanceof String)
+                return bitString.equals(obj);
+            else if(obj instanceof BitString) {
+                return obj.toString().equals(bitString);
+            }
+            return false;
         }
 
         public int parseInt() {
@@ -128,6 +133,10 @@ public class Utility {
         
         public String toString() {
             return hexString;
+        }
+        
+        public int hashCode() {
+            return hexString.hashCode();
         }
     }
 

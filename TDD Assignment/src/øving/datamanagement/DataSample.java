@@ -37,4 +37,12 @@ public class DataSample {
     public int getBitsValue1() {
         return bitsValue1;
     }
+    
+    public String toString() {
+        return  "Sample-line: " + sampleLine + "\n" +
+                "Processed-line: " + processed + "\n" +
+                "Data-value: " + dataVal + "\n" +
+                "Integer of first bitstring: " + bitsValue0 + "\n" +
+                "Integer of second bitstring: " + bitsValue1;
+    }
 }
