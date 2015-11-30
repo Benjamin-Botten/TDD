@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import øving.utility.Utility.BitOperator;
@@ -15,6 +17,7 @@ public class DataManager {
 
     public static final String SAMPLEFILE_1 = "sampledata_1.sd";
     private SampleFileReader sfReader;
+    private Map<HexString, DataSample> sampleMap = new HashMap<HexString, DataSample>();
 
     public DataManager() {
     }
@@ -34,29 +37,9 @@ public class DataManager {
     public boolean hasNextLine() {
         return sfReader.hasNextLine();
     }
-
-    public boolean verifySampleLine(String sampleLine) {
-        
-        StringTokenizer tokenizer = new StringTokenizer(sampleLine);
-        
-        HexString idData = new HexString(tokenizer.nextToken());
-        
-        int idOperator = Integer.parseInt(tokenizer.nextToken());
-        
-        if(idOperator <= 0 || idOperator > BitOperator.NUM_OPERATORS) return false;
-        
-        BitString[] bitStringCouple = new BitString[] {
-                new BitString(tokenizer.nextToken()), 
-                new BitString(tokenizer.nextToken()) 
-        };
-        
-        if(tokenizer.hasMoreTokens()) throw new IllegalArgumentException("Too many arguments on sample data line, invalid data!");  
-        
-        return true;
-    }
     
-    public boolean saveSample(String sampleLine) {
-        return false;
+    public DataSample processLine(String sampleLine) {
+        return null;
     }
 
     public class SampleFileReader {

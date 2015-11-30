@@ -13,6 +13,9 @@ import org.mockito.Mock;
 
 import øving.datamanagement.DataManager;
 import øving.datamanagement.DataManager.SampleFileReader;
+import øving.datamanagement.DataSample;
+import øving.utility.Utility.HexString;
+import øving.utility.Utility.BitString;
 
 public class DataManagerTest {
 
@@ -44,42 +47,21 @@ public class DataManagerTest {
         assertThat(dm.readLine(), is(equalTo("03ac0f 1 110101000000110111001101 001000011110011101001111")));
         assertThat(dm.readLine(), is(equalTo("ac0e1e 2 001000011110011101001111 000101010101010101111001")));
     }
-    
+
     @Test
     public void hasNextLine_MockedSampleFileContents_ShouldReturnTrueTrueAndFalse() {
-        DataManager dm = new DataManager(sfr);
+        dm = new DataManager(sfr);
         assertThat(dm.hasNextLine(), is(equalTo(true)));
         assertThat(dm.hasNextLine(), is(equalTo(true)));
         assertThat(dm.hasNextLine(), is(equalTo(false)));
     }
     
     @Test
-    public void verifySampleLine_03ac0f_1_110101000000110111001101_001000011110011101001111_ShouldReturnTrue() {
-        DataManager dm = new DataManager();
-        assertThat(dm.verifySampleLine("03ac0f 1 110101000000110111001101 001000011110011101001111"), is(equalTo(true)));
-    }
-    
-    @Test
-    public void verifySampleLine_03ac0f_3_110101000000110111001101_001000011110011101001111_ShouldReturnFalse() {
-        DataManager dm = new DataManager();
-        assertThat(dm.verifySampleLine("03ac0f 3 110101000000110111001101 001000011110011101001111"), is(equalTo(false)));
-    }
-    
-    @Test (expected = IllegalArgumentException.class)
-    public void verifySampleLine_03ac0f_1_110101000000110111001101_001000011110011101001111_NOERROR_ShouldThrowIllegalArgumentException() {
-        DataManager dm = new DataManager();
-        dm.verifySampleLine("03ac0f 1 110101000000110111001101 001000011110011101001111 NOERROR");
-    }
-    
-    @Test (expected = NoSuchElementException.class)
-    public void verifySampleLine_03ac0f_1_110101000000110111001101_ShouldThrowNoSuchElementException() {
-        DataManager dm = new DataManager();
-        dm.verifySampleLine("03ac0f 1 110101000000110111001101");
-    }
-    
-    @Test
-    public void saveSample_03ac0f_1_110101000000110111001101_001000011110011101001111_ShouldReturnTrue() {
-        DataManager dm = new DataManager();
-        assertThat(dm.saveSample("03ac0f_1_110101000000110111001101_001000011110011101001111"), is(equalTo(true)));
+    public void processLine_StringContaining03ac0f_1_110101000000110111001101_001000011110011101001111_ShouldReturnDataSampleContaining_03ac0f_000000000000010101001101() {
+        dm = new DataManager();
+        HexString id = new HexString("03ac0f");
+        BitString data = new BitString("000000000000010101001101");
+        DataSample ds = new DataSample(id, data, data.parseInt());
+        assertThat(dm.processLine("03ac0f 1 110101000000110111001101 001000011110011101001111"), is(equalTo(ds)));
     }
 }
